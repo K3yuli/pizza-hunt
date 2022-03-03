@@ -1,5 +1,6 @@
 // import dependencies
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 // create schema for model - client wants following data stored when users create a pizza:
 const PizzaSchema = new Schema(
@@ -13,7 +14,8 @@ const PizzaSchema = new Schema(
     createdAt: {
         type: Date,
         // if no value is provided when user creates new data, the Date.now function will be executed
-        default: Date.now
+        default: Date.now,
+        get: (createdAtVal) => dateFormat(createdAtVal)
     },
     size: {
         type: String,
@@ -35,6 +37,7 @@ const PizzaSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         // set id to false because this is a virtual that Mongoose returns, it's needed
         id: false

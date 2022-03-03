@@ -7,7 +7,7 @@ const {
     deletePizza
 } = require('../../controllers/pizza-controller');
 
-// set uo GET all and POST at /api/pizzas
+// set up GET all and POST at /api/pizzas
 router
 .route('/')
 .get(getAllPizza)

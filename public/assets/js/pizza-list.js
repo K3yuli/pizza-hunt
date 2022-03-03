@@ -1,4 +1,15 @@
 const $pizzaList = document.querySelector('#pizza-list');
+// get all pizza data and transform to json 
+const getPizzaList = () => {
+  fetch('/api/pizzas')
+  .then(response => response.json())
+  .then(pizzaListArr => {
+    pizzaListArr.forEach(printPizza);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
 
 const printPizza = ({ _id, pizzaName, toppings, size, commentCount, createdBy, createdAt }) => {
   const pizzaCard = `
@@ -26,3 +37,6 @@ const printPizza = ({ _id, pizzaName, toppings, size, commentCount, createdBy, c
 
   $pizzaList.innerHTML += pizzaCard;
 };
+
+// call function on load(like loading a page)
+getPizzaList();
